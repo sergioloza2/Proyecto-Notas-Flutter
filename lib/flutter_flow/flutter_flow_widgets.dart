@@ -44,20 +44,31 @@ class FFButtonWidget extends StatelessWidget {
     @required this.onPressed,
     this.iconData,
     @required this.options,
+    this.autoSize = true,
   }) : super(key: key);
 
   final String text;
   final IconData iconData;
   final VoidCallback onPressed;
   final FFButtonOptions options;
+  final bool autoSize;
 
   @override
   Widget build(BuildContext context) {
-    final textWidget = AutoSizeText(
-      text,
-      style: options.textStyle,
-      maxLines: 1,
-    );
+    dynamic textWidget;
+    if (autoSize) {
+      textWidget = AutoSizeText(
+        text,
+        style: options.textStyle,
+        maxLines: 1,
+      );
+    } else {
+      textWidget = Text(
+        text,
+        style: options.textStyle,
+        maxLines: 1,
+      );
+    }
     if (iconData != null) {
       return SizedBox(
         height: options.height,

@@ -115,19 +115,143 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
             Align(
               alignment: const AlignmentDirectional(0, 0),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 26, 0, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 26, 0, 10),
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.75,
-                  height: MediaQuery.of(context).size.height * 0.083,
+                  height: MediaQuery.of(context).size.height * 0.065,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                   ),
                   alignment: const AlignmentDirectional(0, 0),
+                  child: Material(
+                    elevation: 3,
+                    borderRadius: BorderRadius.circular(20),
+                    child: TextFormField(
+                      controller: usernameTextController,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.only(top: 15),
+                        hintText: 'Username',
+                        hintStyle: FlutterFlowTheme.bodyText1.override(
+                          fontFamily: 'Poppins',
+                          fontSize: 19,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0x00000000),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0x00000000),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        filled: true,
+                        fillColor: const Color(0xFFF2F2F2),
+                        prefixIcon: const Icon(
+                          Icons.person,
+                          color: Color(0xFFE23D3D),
+                        ),
+                      ),
+                      style: FlutterFlowTheme.bodyText1.override(
+                        fontFamily: 'Poppins',
+                        fontSize: 19,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: const AlignmentDirectional(0, 0),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 15),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.75,
+                  height: MediaQuery.of(context).size.height * 0.065,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.rectangle,
+                  ),
+                  alignment: const AlignmentDirectional(0, 0),
+                  child: Material(
+                    elevation: 3,
+                    borderRadius: BorderRadius.circular(20),
+                    child: TextFormField(
+                      controller: passwordTextController,
+                      obscureText: !passwordVisibility1,
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.only(top: 15),
+                        hintText: 'Password',
+                        hintStyle: FlutterFlowTheme.bodyText1.override(
+                          fontFamily: 'Poppins',
+                          fontSize: 19,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0x00000000),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0x00000000),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        filled: true,
+                        fillColor: const Color(0xFFF2F2F2),
+                        prefixIcon: const Icon(
+                          Icons.lock_rounded,
+                          color: Color(0xFFE23D3D),
+                        ),
+                        suffixIcon: InkWell(
+                          onTap: () => setState(
+                            () => passwordVisibility1 = !passwordVisibility1,
+                          ),
+                          child: Icon(
+                            passwordVisibility1
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
+                            color: const Color(0xFF757575),
+                            size: 22,
+                          ),
+                        ),
+                      ),
+                      style: FlutterFlowTheme.bodyText1.override(
+                        fontFamily: 'Poppins',
+                        fontSize: 19,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: const AlignmentDirectional(0, 0),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.75,
+                height: MediaQuery.of(context).size.height * 0.065,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.rectangle,
+                ),
+                alignment: const AlignmentDirectional(0, 0),
+                child: Material(
+                  elevation: 3,
+                  borderRadius: BorderRadius.circular(20),
                   child: TextFormField(
-                    controller: usernameTextController,
-                    obscureText: false,
+                    controller: passwordConfirmTextController,
+                    obscureText: !passwordVisibility2,
                     decoration: InputDecoration(
-                      hintText: 'Username',
+                      contentPadding: const EdgeInsets.only(top: 15),
+                      hintText: 'Confirm password',
                       hintStyle: FlutterFlowTheme.bodyText1.override(
                         fontFamily: 'Poppins',
                         fontSize: 19,
@@ -149,132 +273,26 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                       filled: true,
                       fillColor: const Color(0xFFF2F2F2),
                       prefixIcon: const Icon(
-                        Icons.person,
+                        Icons.lock_rounded,
                         color: Color(0xFFE23D3D),
+                      ),
+                      suffixIcon: InkWell(
+                        onTap: () => setState(
+                          () => passwordVisibility2 = !passwordVisibility2,
+                        ),
+                        child: Icon(
+                          passwordVisibility2
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined,
+                          color: const Color(0xFF757575),
+                          size: 22,
+                        ),
                       ),
                     ),
                     style: FlutterFlowTheme.bodyText1.override(
                       fontFamily: 'Poppins',
                       fontSize: 19,
                     ),
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: const AlignmentDirectional(0, 0),
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.75,
-                height: MediaQuery.of(context).size.height * 0.083,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.rectangle,
-                ),
-                alignment: const AlignmentDirectional(0, 0),
-                child: TextFormField(
-                  controller: passwordTextController,
-                  obscureText: !passwordVisibility1,
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                    hintStyle: FlutterFlowTheme.bodyText1.override(
-                      fontFamily: 'Poppins',
-                      fontSize: 19,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Color(0x00000000),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Color(0x00000000),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    filled: true,
-                    fillColor: const Color(0xFFF2F2F2),
-                    prefixIcon: const Icon(
-                      Icons.lock_rounded,
-                      color: Color(0xFFE23D3D),
-                    ),
-                    suffixIcon: InkWell(
-                      onTap: () => setState(
-                        () => passwordVisibility1 = !passwordVisibility1,
-                      ),
-                      child: Icon(
-                        passwordVisibility1
-                            ? Icons.visibility_outlined
-                            : Icons.visibility_off_outlined,
-                        color: const Color(0xFF757575),
-                        size: 22,
-                      ),
-                    ),
-                  ),
-                  style: FlutterFlowTheme.bodyText1.override(
-                    fontFamily: 'Poppins',
-                    fontSize: 19,
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: const AlignmentDirectional(0, 0),
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.75,
-                height: MediaQuery.of(context).size.height * 0.083,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.rectangle,
-                ),
-                alignment: const AlignmentDirectional(0, 0),
-                child: TextFormField(
-                  controller: passwordConfirmTextController,
-                  obscureText: !passwordVisibility2,
-                  decoration: InputDecoration(
-                    hintText: 'Confirm password',
-                    hintStyle: FlutterFlowTheme.bodyText1.override(
-                      fontFamily: 'Poppins',
-                      fontSize: 19,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Color(0x00000000),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Color(0x00000000),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    filled: true,
-                    fillColor: const Color(0xFFF2F2F2),
-                    prefixIcon: const Icon(
-                      Icons.lock_rounded,
-                      color: Color(0xFFE23D3D),
-                    ),
-                    suffixIcon: InkWell(
-                      onTap: () => setState(
-                        () => passwordVisibility2 = !passwordVisibility2,
-                      ),
-                      child: Icon(
-                        passwordVisibility2
-                            ? Icons.visibility_outlined
-                            : Icons.visibility_off_outlined,
-                        color: const Color(0xFF757575),
-                        size: 22,
-                      ),
-                    ),
-                  ),
-                  style: FlutterFlowTheme.bodyText1.override(
-                    fontFamily: 'Poppins',
-                    fontSize: 19,
                   ),
                 ),
               ),
