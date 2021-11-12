@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:test_flutter_flow/apiservice/apiservice.dart';
-import 'package:test_flutter_flow/editpage.dart';
 
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -9,34 +8,18 @@ import 'package:flutter/material.dart';
 
 import 'navdrawer/navdrawer.dart';
 
-class NotesPageWidget extends StatefulWidget {
-  const NotesPageWidget({Key key}) : super(key: key);
+class EditPageWidget extends StatefulWidget {
+  EditPageWidget({Key key}) : super(key: key);
 
   @override
-  _NotesPageWidgetState createState() => _NotesPageWidgetState();
+  _EditPageWidgetState createState() => _EditPageWidgetState();
 }
 
-class _NotesPageWidgetState extends State<NotesPageWidget> {
+class _EditPageWidgetState extends State<EditPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
   Color safeAreaColor = const Color(0xFFEBEBEB);
 
-  List<dynamic> notasObtenidas = [];
-
-  @override
-  void initState() {
-    super.initState();
-
-    _asyncApiCall();
-  }
-
-  _asyncApiCall() async {
-    List<dynamic> notasDeApi = await ServiceApi.getUserNotes(3);
-
-    setState(() {
-      notasObtenidas = notasDeApi;
-    });
-  }
+  bool _editorReadOnly = true;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +79,7 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
           title: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'All notes:',
+              'Edit your note: ',
               textAlign: TextAlign.start,
               style: FlutterFlowTheme.bodyText1.override(
                 fontFamily: 'Poppins',
@@ -112,8 +95,8 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
               borderWidth: 1,
               buttonSize: 60,
               icon: const Icon(
-                Icons.settings,
-                color: Color(0xFF2F2F2F),
+                Icons.save,
+                color: Color(0xFF6E6E6E),
                 size: 30,
               ),
               onPressed: () {
@@ -126,20 +109,6 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
         ),
       ),
       backgroundColor: Colors.black,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print('FloatingActionButton pressed ...');
-
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => EditPageWidget()));
-        },
-        backgroundColor: const Color(0xFFF0F0F0),
-        child: const Icon(
-          Icons.add,
-          color: Color(0xFFAEAEAE),
-          size: 40,
-        ),
-      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -148,57 +117,30 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
           maxHeight: double.infinity,
         ),
         decoration: const BoxDecoration(
-          color: Color(0xFFF8F8F8),
+          color: Color(0xFFA1F195),
         ),
-        child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(20, 15, 20, 0),
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: const ClampingScrollPhysics(),
-              itemCount: notasObtenidas.length,
-              itemBuilder: (BuildContext ctxt, int i) {
-                return TextNoteWidget(
-                    contenido: notasObtenidas[i]['contenido'],
-                    alignment: Alignment.centerLeft);
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Color(0xFFF8F8F8),
+          ),
+          padding: EdgeInsets.only(left: 20, right: 20),
+          constraints: BoxConstraints(maxHeight: 300),
+          child: SingleChildScrollView(
+            child: TextField(
+              autofocus: false,
+              readOnly: _editorReadOnly,
+              maxLines: null,
+              style: FlutterFlowTheme.subtitle2.override(
+                fontFamily: 'Poppins',
+                color: const Color(0xFF111111),
+                fontWeight: FontWeight.normal,
+              ),
+              onTap: () {
+                setState(() {
+                  _editorReadOnly = false;
+                });
               },
-            )),
-      ),
-    );
-  }
-}
-
-class TextNoteWidget extends StatelessWidget {
-  const TextNoteWidget({Key key, this.contenido = '', this.alignment})
-      : super(key: key);
-
-  final String contenido;
-  final Alignment alignment;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 15),
-      child: Container(
-        width: double.infinity,
-        height: MediaQuery.of(context).size.height * 0.07,
-        decoration: const BoxDecoration(
-          color: Color(0x00EEEEEE),
-        ),
-        child: FFButtonWidget(
-          alignment: alignment,
-          autoSize: false,
-          onPressed: () {
-            print('Button pressed ...');
-          },
-          text: contenido,
-          options: FFButtonOptions(
-            width: double.infinity,
-            color: Colors.white,
-            textStyle: FlutterFlowTheme.subtitle2.override(
-              fontFamily: 'Poppins',
-              color: const Color(0xFF111111),
-              fontWeight: FontWeight.normal,
             ),
-            borderRadius: 12,
           ),
         ),
       ),

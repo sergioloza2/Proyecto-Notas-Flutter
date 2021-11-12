@@ -45,6 +45,7 @@ class FFButtonWidget extends StatelessWidget {
     this.iconData,
     @required this.options,
     this.autoSize = true,
+    this.alignment,
   }) : super(key: key);
 
   final String text;
@@ -52,6 +53,7 @@ class FFButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
   final FFButtonOptions options;
   final bool autoSize;
+  final Alignment alignment;
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +65,22 @@ class FFButtonWidget extends StatelessWidget {
         maxLines: 1,
       );
     } else {
-      textWidget = Text(
-        text,
-        style: options.textStyle,
-        maxLines: 1,
-      );
+      if (alignment == null) {
+        textWidget = Text(
+          text,
+          style: options.textStyle,
+          maxLines: 1,
+        );
+      } else {
+        textWidget = Align(
+          alignment: alignment,
+          child: Text(
+            text,
+            style: options.textStyle,
+            maxLines: 1,
+          ),
+        );
+      }
     }
     if (iconData != null) {
       return SizedBox(
